@@ -1,0 +1,9 @@
+<ol class="ek-breadcrumb clear">
+  {{#each @root}}
+    {{#if @last}}
+      <li class="ek-breadcrumb-item last-child">{{name}}</li>
+    {{else}}
+      <li class="ek-breadcrumb-item ek-link" data-path="{{path}}">{{name}}</li>
+    {{/if}}
+  {{/each}}
+</ol>

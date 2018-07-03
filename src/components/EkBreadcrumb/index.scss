@@ -1,0 +1,16 @@
+.ek-breadcrumb {
+  &-item {
+    float: left;
+    color: white;
+    &+.ek-breadcrumb-item {
+      &:before {
+        padding: 0 5px;
+        color: #cfddfe;
+        content: ">";
+      }      
+    }
+    &.last-child {
+      color: #cfddfe;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.ek-switch-district {
+  position: absolute;
+  top: 30px;
+  width: 300px;
+  z-index: 10;
+  border: 1px solid #ededed;
+  background-color: white;
+  &-tab {
+    margin-bottom: 0;
+    height: 30px;
+    background-color: #f4f4f4;
+    &-item {
+      line-height: 30px;
+      float: left;
+      width: 50%;
+      &.active {
+        color: #40bb8a;
+        background-color: white;
+      }
+    }
+    &-content {
+      padding: 10px 10px 20px;
+      display: none;
+      &.active {
+        display: block;
+      }
+    }
+  }
+}

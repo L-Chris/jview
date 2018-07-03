@@ -1,0 +1,38 @@
+.ek-pagination {
+  ul {
+    float: left;
+  }
+  li {
+    float: left;
+    height: 30px;
+    line-height: 28px;
+    font-size: 12px;
+    margin-right: 9px;
+    .ek-button-link {
+      border: 1px solid#ececec;
+    }
+  }
+  &-item {
+    width: 30px;
+    &.active {
+      color: white;
+      background-color: $btn-color-blue;
+    }
+  }
+  &-total {
+    float: left;
+    margin-right: 16px!important;
+    line-height: 30px;
+    color: $text-color-grey;
+  }
+  &-prev, &-next {
+    width: 60px;
+    margin-right: 9px;
+  }
+  &-quick {
+    margin-right: 9px;
+    font-size: 12px;
+    line-height: 30px;
+    user-select: none;
+  }
+}

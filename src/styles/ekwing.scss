@@ -1,0 +1,57 @@
+$btn-small-height: 24px;
+$btn-normal-height: 36px;
+$btn-big-height: 44px;
+
+.ek-button {
+  @include button;
+  @include height($btn-normal-height);
+  @include borderRouned($btn-normal-height / 2);
+  display: inline-block;
+  width: 120px;
+  color: white;
+  background-color: $btn-color-blue;
+  font-size: 12px;
+}
+
+.ek-link {
+  @include button;
+  color: $background-color-blue;
+}
+
+.ek-button-link {
+  @include button;
+  border: 1px solid $border-color-grey;
+  &:hover {
+    color: white;
+    background: $background-color-blue;
+  }
+}
+
+.ek-button-borded {
+  @include button;
+  @include height($btn-normal-height);
+  @include borderRouned($btn-normal-height / 2);
+  display: inline-block;
+  width: 120px;
+  border: 1px solid $btn-color-blue;
+  border-radius: 2px;
+  background-color: #fff;
+  color: $btn-color-blue;
+}
+
+.ek-tab {
+  @include height($btn-normal-height);
+  border-radius: 2px;
+  &-item {
+    @include button;
+    width: 106px;
+    height: 100%;
+    float: left;
+    color: $btn-color-blue;
+    border: 1px solid $btn-color-blue;
+    &.active {
+      color: white;
+      background-color: $btn-color-blue;
+    }
+  }
+}

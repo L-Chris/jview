@@ -1,0 +1,11 @@
+<ul class="ek-timer clear text-center">
+  {{#each @root}}
+  <li class="ek-timer-item" data-type="{{type}}">
+    <ul class="clear">
+      <li class="ek-timer-number">{{first}}</li>
+      <li class="ek-timer-number">{{second}}</li>
+      <li class="ek-timer-desc">{{type}}</li>
+    </ul>
+  </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,26 @@
+.ek-alert {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  padding: 10px 15px;
+  margin: 0 auto;
+  z-index: 100;
+  color: #fff;
+  &.success {
+    background-color: $color-success;
+  }
+  &.warn {
+    background-color: $color-warn;
+  }
+  &.danger {
+    background-color: $color-danger;
+  }
+  .close {
+    -webkit-appearance: none;
+    background: 0 0;
+    border: 0;
+    color: #fff;
+  }
+}

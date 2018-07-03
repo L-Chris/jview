@@ -1,0 +1,29 @@
+.ek-tooltip {
+  position: absolute;
+  /*display: none;*/
+  white-space: nowrap;
+  padding: 8px 10px;
+  background-color: #000;
+  color: #fff;
+  line-height: 20px;
+}
+.ek-tooltip.right:after {
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    border-width: 8px 8px;
+    border-style: solid;
+    border-color: transparent #000 transparent transparent; 
+}
+.ek-tooltip.left:after {
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    border-width: 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent  #000; 
+}

@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+// Body reset
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+// Reset fonts for relevant elements
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// Figures
+//
+// We reset this here because previously Normalize had no `figure` margins. This
+// ensures we don't break anyone's use of the element.
+
+figure {
+  margin: 0;
+}
+
+[role="button"] {
+  user-select: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.text {
+  &-center {
+    text-align: center;
+  }
+  &-left {
+    text-align: left;
+  }
+  &-right {
+    text-align: right;
+  }
+}
+
+.float {
+  &-r {
+    float: right;
+  }
+  &-l {
+    float: left;
+  }
+}
+
+// grid
+.row {
+  &:after, &:before {
+    clear: both;
+    display: table;
+    content: " ";
+  }
+}
+.row [class*="col-"] {
+  position: relative;
+  float: left;
+  min-height: 1px;
+}
+
+@for $i from 1 through 12 {
+  .col-md-#{$i} {
+    width: percentage($i / 12);
+  }
+}
+
+.close {
+  @include opacity(0.2);
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  outline: 0;
+}
+
+.clear {
+  &::after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+}

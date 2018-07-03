@@ -1,0 +1,22 @@
+.ek-timer {
+  color: #ffffff;
+  li {
+    float: left;
+  }
+  &-item {
+    li {
+      width: 23px;
+      height: 34px;
+      margin-right: 4px;
+      line-height: 34px;
+    }
+  }
+  &-number {
+    font-size: 20px;
+    border-radius: 3px;
+    background-color: #5d83f4;
+  }
+  &-desc {
+    font-size: 15px;
+  }
+}

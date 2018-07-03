@@ -1,0 +1,14 @@
+<nav class="ek-pagination clearfix text-center">
+  <span class="ek-pagination-total">共{{totalElements}}条记录</span>
+  <ul>
+    <li class="ek-pagination-prev ek-button-link" data-page="prev">上一页</li>
+    <li class="ek-pagination-item ek-button-link" data-id="1" data-page="1">1</li>
+    <li class="ek-pagination-quick" data-page="quickprev">...</li>
+    {{#array 6 2}}
+      <li class="ek-pagination-item ek-button-link" data-id="{{@i}}" data-page=""></li>
+    {{/array}}
+    <li class="ek-pagination-quick" data-page="quicknext">...</li>
+    <li class="ek-pagination-item ek-button-link" data-id="8" data-page="{{total}}">{{total}}</li>
+    <li class="ek-pagination-next ek-button-link" data-page="next">下一页</li>
+  </ul>
+</nav>
