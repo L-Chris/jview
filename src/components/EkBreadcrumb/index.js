@@ -1,15 +1,28 @@
+import {noop} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
-export default data => {
-  let html = template(data)
-  let $html = $(html)
+class EkBreadcrumb {
+  constructor (id, data, {handleClick = noop} = {}) {
+    this.$el = $(id)
+    this.data = data
+    this.options = {handleClick: handleClick.bind(this)}
 
-  $('.ek-link', $html).click(function () {
-    let {path} = this.dataset
+    this.render()
+  }
 
-    $.router.push({path}, {keepHash: false})
-  })
+  render () {
+    let html = template(this.data)
+    let $html = $(html)
 
-  return $html
+    $('.ek-link', $html).click(function () {
+      let {path} = this.dataset
+
+      this.options.handleClick({path})
+    })
+
+    this.$el.html($html)
+  }
 }
+
+export default EkBreadcrumb

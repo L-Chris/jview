@@ -54,15 +54,15 @@ module.exports = {
     cssSourceMap: true
   },
 
-  build: {
+  doc: {
     env: require('./prod.env'),
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../docs'),
     assetsSubDirectory: '',
-    assetsPublicPath: '../',
+    assetsPublicPath: './',
     assetsCDNRoot: '',
 
     /**
@@ -88,11 +88,11 @@ module.exports = {
     bundleAnalyzerReport: false
   },
 
-  package: {
+  build: {
     env: require('./prod.env'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../packages'),
+    assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: '',
     assetsPublicPath: './',
     assetsCDNRoot: '',
@@ -117,6 +117,6 @@ module.exports = {
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
     // bundleAnalyzerReport: process.env.npm_config_report
-    bundleAnalyzerReport: true
+    bundleAnalyzerReport: false
   }
 }

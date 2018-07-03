@@ -1,4 +1,3 @@
-import Handlebars from 'handlebars'
 import EkAlert from '@/components/EkAlert'
 import EkDialog from '@/components/EkDialog'
 import EkTooltip from '@/components/EkToolTip'
@@ -41,14 +40,6 @@ export default $ => {
     tooltip: (message, options) => {
       let params = Object.assign({message}, options)
       return EkTooltip.create(params);
-    }
-  })
-  $.fn.extend({
-    compile: function (template, data) {
-      if(compiled[template] == undefined) {
-        compiled[template] = Handlebars.compile(template)
-      }
-      return this.html(compiled[template](data))
     }
   })
 }

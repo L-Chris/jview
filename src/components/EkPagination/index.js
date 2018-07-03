@@ -45,8 +45,6 @@ class EkPagination {
       this.update({...this.data, page})
 
       this.options.handleClick(this.data)
-
-      $.router.push({hash: {page}})
     })
   
     this.$el.html($html)

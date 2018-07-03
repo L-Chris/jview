@@ -3,6 +3,7 @@ const utils = require('./utils')
 const autoprefixer = require('autoprefixer')
 const config = require('../config')
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const es3ifyPlugin = require('es3ify-webpack-plugin')
 
 function resolve (dir) {
@@ -32,10 +33,20 @@ module.exports = {
       loader: 'babel-loader'
     },{
       test: /\.css$/,
-      loaders: ['css-loader', 'style-loader', 'postcss-loader']
+      loaders: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {}
+        },
+        'css-loader', 'style-loader', 'postcss-loader']
     }, {
       test: /\.scss$/,
-      loaders: ['css-loader', 'sass-loader', {
+      loaders: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {}
+        },
+        'css-loader', 'sass-loader', {
         loader: 'sass-resources-loader',
         options: {
           resources: ['./src/styles/vars.scss', './src/styles/mixins.scss']

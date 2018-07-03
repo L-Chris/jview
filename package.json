@@ -8,8 +8,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "build-package": "node build/build.package.js",
-    "bp": "node build/build.package.js"
+    "build-doc": "node build/build.doc.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
@@ -29,7 +28,7 @@
     "glob": "^7.1.2",
     "handlebars": "^4.0.11",
     "handlebars-loader": "^1.7.0",
-    "html-webpack-plugin": "2.28.0",
+    "html-webpack-plugin": "^4.0.0-alpha",
     "http-proxy-middleware": "^0.18.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.0",
@@ -53,8 +52,7 @@
   },
   "dependencies": {
     "dayjs": "^1.6.5",
-    "handlebars-utils": "^1.0.6",
-    "query-string": "5"
+    "handlebars-utils": "^1.0.6"
   },
   "engines": {
     "node": ">= 4.0.0",

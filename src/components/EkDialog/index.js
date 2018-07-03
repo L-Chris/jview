@@ -1,8 +1,6 @@
 import template from './index.hbs'
 import './index.scss'
 
-const emmiter = $({})
-
 class EkDialog {
   constructor ({title, content, close, next = "", fn} = {}) {
     this.$el = null
