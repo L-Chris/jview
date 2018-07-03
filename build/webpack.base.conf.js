@@ -31,22 +31,21 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
-    },{
+    }, {
       test: /\.css$/,
       loaders: [
         {
-          loader: MiniCssExtractPlugin.loader,
+          loader: process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'css-loader',
           options: {}
         },
-        'css-loader', 'style-loader', 'postcss-loader']
+        'style-loader', 'postcss-loader']
     }, {
       test: /\.scss$/,
       loaders: [
         {
-          loader: MiniCssExtractPlugin.loader,
+          loader: process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'css-loader',
           options: {}
-        },
-        'css-loader', 'sass-loader', {
+        }, 'sass-loader', {
         loader: 'sass-resources-loader',
         options: {
           resources: ['./src/styles/vars.scss', './src/styles/mixins.scss']

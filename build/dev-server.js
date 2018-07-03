@@ -61,10 +61,7 @@ const rewrites = Object.entries(pages).reduce((pre, [name]) => {
   return pre
 }, [])
 
-app.use(require('connect-history-api-fallback')({
-  index: '/home/index.html',
-  rewrites
-}))
+app.use(require('connect-history-api-fallback')())
 
 app.use(devMiddleware)
 
