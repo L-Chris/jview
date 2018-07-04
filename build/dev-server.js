@@ -25,8 +25,7 @@ const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  quiet: true,
-  noInfo: true
+  logLevel: 'silent'
 })
 
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
@@ -49,17 +48,6 @@ Object.keys(proxyTable).forEach(function (context) {
   }
   app.use(proxyMiddleware(options.filter || context, options))
 })
-
-const pages = utils.findEntry(`${config.base.viewsSubDirectory}/*/index.hbs`)
-const rewrites = Object.entries(pages).reduce((pre, [name]) => {
-  if (!name.includes('home/index')) {
-    pre.push({
-      from: new RegExp(`\/${name.replace(/\/index$/, '')}$`),
-      to: `/${name}.html`
-    })
-  }
-  return pre
-}, [])
 
 app.use(require('connect-history-api-fallback')())
 

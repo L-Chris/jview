@@ -20,7 +20,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       title: 'dev',
       filename: 'index.html',
-      template: 'index.html'
+      template: 'index.html',
+      inject: true
     }),
     new webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsPlugin()

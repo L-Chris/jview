@@ -3,8 +3,6 @@ import EkDialog from '@/components/EkDialog'
 import EkTooltip from '@/components/EkToolTip'
 import {alertTypes} from '@/utils/const'
 
-const compiled = {}
-
 export default $ => {
   $.extend({
     nextTick (fn) {

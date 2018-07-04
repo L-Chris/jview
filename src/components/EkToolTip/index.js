@@ -76,7 +76,6 @@ class EkTooltipManager {
   }
 
   create (params) {
-    console.log(params)
     let item = new EkTooltip(params)
     if (this.list.length >= this.maxLength) this.list.shift().destroyed()
     this.list.push(item)

@@ -27,38 +27,22 @@ module.exports = {
     }
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.css$/,
-      loaders: [
-        {
-          loader: process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'css-loader',
-          options: {}
-        },
-        'style-loader', 'postcss-loader']
-    }, {
-      test: /\.scss$/,
-      loaders: [
-        {
-          loader: process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'css-loader',
-          options: {}
-        }, 'sass-loader', {
-        loader: 'sass-resources-loader',
-        options: {
-          resources: ['./src/styles/vars.scss', './src/styles/mixins.scss']
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      ...utils.generateStyleLoaders(),
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars-loader',
+        query: {
+          helperDirs: [resolve('src/handlebars/helpers')],
+          partialDirs: [resolve('src/handlebars/partials')]
         }
-      }]
-    }, {
-      test: /\.hbs$/,
-      loader: 'handlebars-loader',
-      query: {
-        helperDirs: [resolve('src/handlebars/helpers')],
-        partialDirs: [resolve('src/handlebars/partials')]
       }
-    }]
+    ]
   },
   plugins: [new es3ifyPlugin()],
   externals: {
