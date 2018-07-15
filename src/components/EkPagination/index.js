@@ -1,19 +1,30 @@
 import $ from '$'
+import EkComponent from '@/components/EkComponent'
 import {noop} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
-class EkPagination {
-  constructor (id, data, { maxLength = 8, halfLength = maxLength / 2, handleClick = noop } = {}) {
-    let html = template(data)
-    let $html = $(html)
+class EkPagination extends EkComponent {
+  constructor ({
+    id,
+    data: {
+      page = 1,
+      total = 1,
+      totalElements = 0
+    } = {},
+    options: {
+      maxLength = 8,
+      halfLength = maxLength / 2,
+      handleClick = noop
+    } = {}
+  } = {}) {
+    super({
+      id,
+      data: {page, total, totalElements},
+      template
+    })
+    let $html = this.compile()
 
-    this.$el = $(id)
-    this.data = {
-      page: 1,
-      total: 1,
-      totalElements: 0
-    }
     this.options = {maxLength, halfLength, handleClick: handleClick.bind(this)}
     this.$total = $('.ek-pagination-total', $html)
     this.$prev = $('[data-page=prev]', $html)
@@ -22,10 +33,10 @@ class EkPagination {
     this.$quicknext = $('[data-page=quicknext]', $html)
     this.$page = $('.ek-pagination-item', $html)
 
-    this.init(data, $html)
+    this.render(data, $html)
   }
 
-  init (data, $html) {
+  render (data, $html) {
     this.update(data, $html)
   
     $('ul', $html).click(e => {

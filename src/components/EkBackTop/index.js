@@ -1,20 +1,18 @@
 import $ from '$'
+import EkComponent from '@/components/EkComponent'
 import template from './index.hbs'
 import './index.scss'
 
-class EkBackTop {
-  constructor (id) {
-    this.$el = $(id)
+class EkBackTop extends EkComponent {
+  constructor ({id}) {
+    super({id, template})
     
-    this.init()
+    this.render()
   }
 
-  init () {
-    const $window = $(window)
-    const $body = $('html,body')
-
-    let html = template()
-    let $html = $(html)
+  render () {
+    const {$window, $body} = this.constructor
+    let $html = this.compile()
 
     $window.scroll($.throttle(() => {
       let scrollTop = $window.scrollTop()

@@ -1,3 +1,4 @@
+import EkComponent from '@/components/EkComponent'
 import template from './index.hbs'
 import './index.scss'
 
@@ -5,27 +6,38 @@ const emmiter = $({})
 let id = 0
 const uid = () => id++
 
-class EkAlert {
-  constructor ({title, type, wait = 2500, close = true} = {}) {
-    this.$el = null
-    this.data = {
-      id: `ek-alert-${uid()}`,
+class EkAlert extends EkComponent {
+  constructor ({
+    data: {
+      id = `ek-alert-${uid()}`,
       title,
       type,
-      close
-    }
-    this.wait = wait
+      close = true
+    } = {},
+    options: {
+      wait = 250000
+    } = {}
+  }) {
+    super({
+      data: {id, title, type, close},
+      template
+    })
 
-    this.init()
+    this.options = {wait}
+    this.$close = null
+
+    this.render()
   }
 
-  init () {
-    let html = template(this.data)
-    this.$el = $(html)
-    $('.close', this.$el).click(() => this.destroyed())
-    $('body').append(this.$el)
+  render () {
+    this.$el = this.compile()
+    this.$close = $('.close', this.$el)
+
+    this.$close.click(() => this.destroyed())
+    this.constructor.$body.append(this.$el)
+
     this.$el.animate({ top: 10 }, 'slow')
-    setTimeout(() => this.destroyed(), this.wait)
+    setTimeout(() => this.destroyed(), this.options.wait)
   }
 
   destroyed () {

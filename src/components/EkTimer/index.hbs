@@ -2,9 +2,10 @@
   {{#each @root}}
   <li class="ek-timer-item" data-type="{{type}}">
     <ul class="clear">
-      <li class="ek-timer-number">{{first}}</li>
-      <li class="ek-timer-number">{{second}}</li>
-      <li class="ek-timer-desc">{{type}}</li>
+      {{#each data as |number|}}
+      <li class="ek-timer-number">{{number}}</li>
+      {{/each}}
+      <li class="ek-timer-desc">{{label}}</li>
     </ul>
   </li>
   {{/each}}

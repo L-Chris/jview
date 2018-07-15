@@ -33,14 +33,12 @@ exports.generateStyleLoaders = () => {
     }
   }]
 
-  if (isProd) {
-    let miniCssExtractLoader = {
-      loader: MiniCssExtractPlugin.loader,
-      options: {}
-    }
-    cssLoaders.unshift(miniCssExtractLoader)
-    scssLoaders.unshift(miniCssExtractLoader)
+  let miniCssExtractLoader = {
+    loader: MiniCssExtractPlugin.loader,
+    options: {}
   }
+  cssLoaders.unshift(miniCssExtractLoader)
+  scssLoaders.unshift(miniCssExtractLoader)
   return [
     {
       test: /\.css$/,

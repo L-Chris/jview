@@ -46,7 +46,6 @@ module.exports = {
   },
   plugins: [new es3ifyPlugin()],
   externals: {
-    $: 'window.jQuery',
-    handlebars: 'window.Handlebars'
+    $: 'window.jQuery'
   }
 }

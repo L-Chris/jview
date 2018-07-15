@@ -1,38 +1,55 @@
+import EkComponent from '@/components/EkComponent'
 import template from './index.hbs'
 import './index.scss'
 
-class EkDialog {
-  constructor ({title, content, close, next = "", fn} = {}) {
-    this.$el = null
-    this.data = {
+class EkDialog extends EkComponent {
+  constructor ({
+    data: {
       title,
       content,
       close,
-      next,
+      next = ''
+    } = {},
+    option: {
       fn
     }
+  } = {}) {
+    super({
+      data: {title, content, close, next},
+      template
+    })
+
+    this.options = {fn}
+
+    this.$content = null
+    this.$close = null
+    this.$next = null
   }
 
-  show (params) {
-    this.data = params;
-    let html = template(this.data);
-    this.$el = $(html);
-    $('.ek-dialog-main-content', this.$el).html(this.data.content);
-    this.$el.fadeIn(150, () => {
-      $('body').append(this.$el)
-    });
-    $('.close', this.$el).click(() => this.destroyed())
-    $('.next', this.$el).click(() => {
-      this.data.fn();
-      this.destroyed();
+  render (params) {
+    this.data = params
+    this.$el = this.compile()
+
+    this.$content = $('.ek-dialog-main-content', this.$el)
+    this.$close = $('.close', this.$el)
+    this.$next = $('.next', this.$el)
+
+    this.$content.html(this.data.content)
+    this.constructor.$body.append(this.$el)
+  
+    this.$close.click(() => this.hide())
+    this.$next.click(() => {
+      this.data.fn()
+      this.hide()
     })
   }
 
-  destroyed () {
-    if (!this.$el) return
-    this.$el.fadeOut(150, () => {
-      this.$el.remove()
-    });
+  show () {
+    this.$el.show()
+  }
+
+  hide () {
+    this.$el.hide()
   }
 }
 

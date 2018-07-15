@@ -2,13 +2,13 @@
   "name": "ek-competition",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "http://gitlab.ekwing.com/ed/ek-competition.git",
-  "author": "liangjiahui <liangjiahui@moyi365.com>",
+  "repository": "https://github.com/L-Chris/jview",
+  "author": "l-chris <563303226@qq.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "webpack-dev-server --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
-    "build-doc": "node build/build.doc.js"
+    "build:doc": "node build/build.doc.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
@@ -19,7 +19,6 @@
     "babel-loader": "^8.0.0-beta.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "chalk": "^2.4.1",
-    "connect-history-api-fallback": "^1.5.0",
     "css-loader": "^0.28.11",
     "es3ify-webpack-plugin": "^0.0.1",
     "express": "^4.15.3",
@@ -31,7 +30,6 @@
     "http-proxy-middleware": "^0.18.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.0",
-    "opn": "^5.3.0",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
     "ora": "^2.1.0",
     "postcss-loader": "^2.1.5",
@@ -45,8 +43,7 @@
     "webpack": "^4.14.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-middleware": "^3.1.3",
-    "webpack-hot-middleware": "^2.22.2",
+    "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {

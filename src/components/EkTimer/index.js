@@ -1,34 +1,36 @@
 import $ from '$'
+import EkComponent from '@/components/EkComponent'
 import {moment} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
-class EkTimer {
-  constructor (id, {endTime}) {
-    this.$el = $(id)
-    this.$number = null
+class EkTimer extends EkComponent {
+  constructor ({
+    id,
+    data = [
+      {type: 'D', label: '天', data: [0, 0]},
+      {type: 'H', label: '时', data: [0, 0]},
+      {type: 'm', label: '分', data: [0, 0]},
+      {type: 's', label: '秒', data: [0, 0]}
+    ],
+    options: {
+      endTime
+    }
+  } = {}) {
+    super({id, data, template})
 
-    this.data = [
-      {first: 0, second: 0, type: '天'},
-      {first: 0, second: 0, type: '时'},
-      {first: 0, second: 0, type: '分'},
-      {first: 0, second: 0, type: '秒'}
-    ]
-    this.endTime = endTime
+    this.options = {endTime}
+    this.$number = null
     this.timer = null
-    
-    this.init()
+    this.render()
   }
 
-  init () {
-    let html = template(this.data)
-
-    let $html = $(html)
+  render () {
+    let $html = this.compile()
 
     this.$number = $('.ek-timer-number', $html)
-
-    this.tick()
     this.$el.html($html)
+    this.tick()
   }
 
   update (data) {
@@ -40,13 +42,13 @@ class EkTimer {
 
   tick () {
     this.timer = setInterval(() => {
-      let data = this._generateData()
+      let data = this.constructor._generateData(this.options.endTime)
       this.update(data)
     }, 1000)
   }
 
-  _generateData () {
-    let leftTime = moment(this.endTime).diff(moment())
+  static _generateData (time) {
+    let leftTime = moment(time).diff(moment())
     return moment(leftTime).format('DDHHMMss').split('')
   }
 }

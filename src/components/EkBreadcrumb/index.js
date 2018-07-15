@@ -1,24 +1,32 @@
-import {noop} from '@/utils'
+import $ from '$'
+import EkComponent from '@/components/EkComponent'
 import template from './index.hbs'
+import {noop} from '@/utils'
 import './index.scss'
 
-class EkBreadcrumb {
-  constructor (id, data, {handleClick = noop} = {}) {
-    this.$el = $(id)
-    this.data = data
+class EkBreadcrumb extends EkComponent {
+  constructor ({
+    id,
+    data,
+    options: {
+      handleClick = noop
+    } = {}
+  } = {}) {
+    super({id, data, template})
     this.options = {handleClick: handleClick.bind(this)}
 
     this.render()
   }
 
   render () {
-    let html = template(this.data)
-    let $html = $(html)
+    const that = this
+    let html = this.compile()
 
     $('.ek-link', $html).click(function () {
-      let {path} = this.dataset
+      let {index} = this.dataset
+      let route = that.data[index]
 
-      this.options.handleClick({path})
+      that.options.handleClick(route)
     })
 
     this.$el.html($html)
