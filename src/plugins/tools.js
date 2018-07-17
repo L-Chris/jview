@@ -27,8 +27,8 @@ export default $ => {
     },
     alert: alertTypes.reduce((pre, _) => {
       pre[_.type] = function (title, options) {
-        let params = Object.assign({title, type: _.type}, options)
-        EkAlert.create(params)
+        let data = {title, type: _.type}
+        EkAlert.create({data, options})
       }
       return pre
     }, {}),
