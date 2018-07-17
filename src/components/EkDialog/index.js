@@ -1,4 +1,5 @@
 import EkComponent from '@/components/EkComponent'
+import {noop} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
@@ -10,9 +11,9 @@ class EkDialog extends EkComponent {
       close,
       next = ''
     } = {},
-    option: {
-      fn
-    }
+    options: {
+      fn = noop
+    } = {}
   } = {}) {
     super({
       data: {title, content, close, next},

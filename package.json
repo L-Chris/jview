@@ -5,6 +5,7 @@
   "repository": "https://github.com/L-Chris/jview",
   "author": "l-chris <563303226@qq.com>",
   "license": "MIT",
+  "module": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",

@@ -1,4 +1,3 @@
-import $ from '$'
 import {noop} from '@/utils'
 
 class EkComponent {

@@ -8,16 +8,16 @@
   margin: 0 auto;
   z-index: 100;
   color: #fff;
-  &.success {
+  &.is-success {
     background-color: $color-success;
   }
-  &.warn {
+  &.is-warn {
     background-color: $color-warn;
   }
-  &.danger {
+  &.is-danger {
     background-color: $color-danger;
   }
-  .close {
+  &-close {
     -webkit-appearance: none;
     background: 0 0;
     border: 0;

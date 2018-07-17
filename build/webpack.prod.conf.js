@@ -13,12 +13,12 @@ const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   devtool: config.build.productionSourceMap ? 'source-map' : false,
   output: {
-    library: 'jview',
-    libraryTarget: 'umd',
     path: config.build.assetsRoot,
     publicPath: config.build.assetsPublicPath,
-    filename: utils.assetsPath('[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('[id].[chunkhash].js')
+    filename: utils.assetsPath('index.[chunkhash].js'),
+    chunkFilename: utils.assetsPath('[id].[chunkhash].js'),
+    library: 'jview',
+    libraryTarget: 'umd'
   },
   optimization: {
     minimizer: [
@@ -46,8 +46,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       'process.env': config.build.env
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: 'index.[hash].css',
+      chunkFilename: '[id].[chunkhash].css'
     }),
     new OptimizeCSSPlugin({
       cssProcessorOptions: config.build.productionSourceMap
