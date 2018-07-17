@@ -7,10 +7,42 @@ $btn-big-height: 44px;
   @include height($btn-normal-height);
   @include borderRouned($btn-normal-height / 2);
   display: inline-block;
-  width: 120px;
-  color: white;
-  background-color: $btn-color-blue;
+  width: 100px;
   font-size: 12px;
+}
+.ek-button.plain {
+  background-color: #f6f6f6;
+  color: #333333;
+  border: solid 1px #ececec;
+}
+.ek-button.plain:hover {
+  color: #3e98eb;
+  border: solid 1px #3e98eb;
+}
+.ek-button.info {
+  background-color: #3e98eb;
+  color: #ffffff;
+}
+.ek-button.border-info {
+  background-color: #ffffff;
+  border: solid 1px #3e98eb;
+  color: #3e98eb;
+}
+.ek-button.disabled {
+  background-color: #cccccc;
+  color: #ffffff;
+}
+.ek-button.small {
+  width: 87px;
+}
+.ek-button.normal {
+  width: 100px;
+}
+.ek-button.medium {
+  width: 120px;
+}
+.ek-button.large {
+  width: 150px;
 }
 
 .ek-link {

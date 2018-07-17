@@ -1,5 +1,5 @@
 import EkAlert from '@/components/EkAlert'
-import EkDialog from '@/components/EkDialog'
+import EkModal from '@/components/EkModal'
 import EkTooltip from '@/components/EkToolTip'
 import {alertTypes} from '@/utils/const'
 
@@ -32,8 +32,8 @@ export default $ => {
       }
       return pre
     }, {}),
-    dialog (params) {
-      return EkDialog.show(params);
+    modal (params) {
+      return new EkModal(params);
     },
     tooltip: (message, options) => {
       let params = Object.assign({message}, options)

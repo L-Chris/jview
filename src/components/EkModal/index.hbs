@@ -1,0 +1,20 @@
+<div class="ek-modal-mask"></div>
+<div class="ek-modal-wrap">
+	<div class="ek-modal">
+		<div class="ek-modal-content">
+			<button aria-label="Close" role="button" class="ek-modal-close">X</button>
+			<div class="ek-modal-header">{{title}}</div>
+			<div class="ek-modal-body"></div>
+			<div class="ek-modal-footer">
+				<div class="text-center">
+					{{#if cancelVisible}}
+						<button data-type="cancel" class="ek-button medium plain rounded">{{cancelText}}</button>
+					{{/if}}
+					{{#if confirmVisible}}
+						<button data-type="confirm" class="ek-button medium info rounded">{{confirmText}}</button>
+					{{/if}}				
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
