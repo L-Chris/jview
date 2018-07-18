@@ -7,16 +7,12 @@ import './index.scss'
 class EkPagination extends EkComponent {
   constructor ({
     id,
-    data: {
-      page = 1,
-      total = 1,
-      totalElements = 0
-    } = {},
-    options: {
-      maxLength = 8,
-      halfLength = maxLength / 2,
-      handleClick = noop
-    } = {}
+    page = 1,
+    total = 1,
+    totalElements = 0,
+    maxLength = 8,
+    halfLength = maxLength / 2,
+    onClick = noop,
   } = {}) {
     super({
       id,
@@ -25,7 +21,10 @@ class EkPagination extends EkComponent {
     })
     let $html = this.compile()
 
-    this.options = {maxLength, halfLength, handleClick: handleClick.bind(this)}
+    this.maxLength = maxLength
+    this.halfLength = halfLength
+    this.onClick = onClick.bind(this)
+
     this.$total = $('.ek-pagination-total', $html)
     this.$prev = $('[data-page=prev]', $html)
     this.$next = $('[data-page=next]', $html)
@@ -55,7 +54,7 @@ class EkPagination extends EkComponent {
       page = this._correctPage(page)
       this.update({...this.data, page})
 
-      this.options.handleClick(this.data)
+      this.onClick(this.data)
     })
   
     this.$el.html($html)
@@ -75,7 +74,7 @@ class EkPagination extends EkComponent {
   }
 
   trigger (data) {
-    this.options.handleClick(data)
+    this.onClick(data)
   }
 
   _correctPage (page) {
@@ -106,7 +105,7 @@ class EkPagination extends EkComponent {
   }
 
   _updateQuickprev (data) {
-    if (data.total <= this.options.maxLength) return this.$quickprev.hide()
+    if (data.total <= this.maxLength) return this.$quickprev.hide()
 
     if (data.page <= 4 && (this.data.page > 4 || !this.page)) {
       this.$quickprev.hide()
@@ -116,7 +115,7 @@ class EkPagination extends EkComponent {
   }
 
   _updateQuicknext (data) {
-    if (data.total <= this.options.maxLength) return this.$quicknext.hide()
+    if (data.total <= this.maxLength) return this.$quicknext.hide()
 
     const point = this.data.total - 4
     if (data.page >= point && (this.data.page < point || !this.data.page)) {
@@ -141,7 +140,7 @@ class EkPagination extends EkComponent {
       if (id === this.$page.length) return _update($this, total)
 
       let from
-      if (page <= 4 || total <= this.options.maxLength) {
+      if (page <= 4 || total <= this.maxLength) {
         from = 2
       } else if (page > total - 4) {
         from = total - 6

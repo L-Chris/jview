@@ -5,15 +5,13 @@ import './index.scss'
 
 class EkTooltip extends EkComponent {
   constructor ({
-    data: {
-      message,
-      position
-    } = {},
-    $parent
+    title,
+    placement,
+    target
   } = {}) {
-    super({data, template})
+    super({data: {title, placement}, template})
 
-    this.$parent = $parent
+    this.target = target
     this.render()
   }
 
@@ -21,12 +19,12 @@ class EkTooltip extends EkComponent {
     this.$el = this.compile()
 
     this.$el.fadeIn(200, () => {
-      this.$parent.append(this.$el)
-      let pHeight = this.$parent.innerHeight()
-      let pWidth = this.$parent.innerWidth()
+      this.target.append(this.$el)
+      let pHeight = this.target.innerHeight()
+      let pWidth = this.target.innerWidth()
       let selfHeight = this.$el.innerHeight()
       let selfWidth = this.$el.innerWidth()
-      this.$parent.css('position', 'relative')
+      this.target.css('position', 'relative')
       switch(this.position) {
         case 'right': 
           this.$el.css({
@@ -45,7 +43,7 @@ class EkTooltip extends EkComponent {
       }
     })
     
-    $('input', this.$parent).focus(() => this.hide())
+    $('input', this.target).focus(() => this.hide())
   }
 
   show () {

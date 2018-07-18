@@ -1,7 +1,7 @@
 import EkAlert from '@/components/EkAlert'
 import EkModal from '@/components/EkModal'
 import EkTooltip from '@/components/EkToolTip'
-import {alertTypes} from '@/utils/const'
+import {alertTypes, modalTypes} from '@/utils/const'
 
 export default $ => {
   $.extend({
@@ -26,15 +26,15 @@ export default $ => {
       }
     },
     alert: alertTypes.reduce((pre, _) => {
-      pre[_.type] = function (title, options) {
-        let data = {title, type: _.type}
-        EkAlert.create({data, options})
+      pre[_.type] = (title, options) => {
+        return EkAlert.create(Object.assign({title, type: _.type}, options))
       }
       return pre
     }, {}),
-    modal (params) {
-      return new EkModal(params);
-    },
+    modal: modalTypes.reduce((pre, _) => {
+      pre[_.type] = options => new EkModal(Object.assign({}, _, options))
+      return pre
+    }, {}),
     tooltip: (message, options) => {
       let params = Object.assign({message}, options)
       return EkTooltip.create(params);

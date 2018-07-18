@@ -1,4 +1,4 @@
-<ol class="ek-breadcrumb clear">
+<ul class="ek-breadcrumb clearfix">
   {{#for @root}}
     {{#if @last}}
       <li class="ek-breadcrumb-item last-child">{{name}}</li>
@@ -6,4 +6,4 @@
       <li class="ek-breadcrumb-item ek-link" data-index="{{@i}}">{{name}}</li>
     {{/if}}
   {{/for}}
-</ol>
+</ul>

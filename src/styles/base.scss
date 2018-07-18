@@ -92,18 +92,7 @@ li {
   }
 }
 
-.close {
-  @include opacity(0.2);
-  float: right;
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  outline: 0;
-}
-
-.clear {
+.clearfix {
   &::after {
     content: '';
     clear: both;

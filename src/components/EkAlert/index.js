@@ -8,22 +8,18 @@ const uid = () => id++
 
 class EkAlert extends EkComponent {
   constructor ({
-    data: {
-      id = `ek-alert-${uid()}`,
-      title,
-      type,
-      close = true
-    } = {},
-    options: {
-      wait = 250000
-    } = {}
+    id = `ek-alert-${uid()}`,
+    title,
+    type,
+    closable = true,
+    wait = 2500
   }) {
     super({
-      data: {id, title, type, close},
+      data: {id, title, type, closable},
       template
     })
 
-    this.options = {wait}
+    this.wait = wait
     this.$close = null
 
     this.render()
@@ -31,13 +27,13 @@ class EkAlert extends EkComponent {
 
   render () {
     this.$el = this.compile()
-    this.$close = $('.close', this.$el)
+    this.$close = $('.ek-alert-close', this.$el)
 
     this.$close.click(() => this.destroyed())
     this.constructor.$body.append(this.$el)
 
     this.$el.animate({ top: 10 }, 'slow')
-    setTimeout(() => this.destroyed(), this.options.wait)
+    setTimeout(() => this.destroyed(), this.wait)
   }
 
   destroyed () {
@@ -63,6 +59,7 @@ class EkAlertManager {
     let item = new EkAlert(params)
     if (this.list.length >= this.maxLength) this.list.shift().destroyed()
     this.list.push(item)
+    return item
   }
 
   remove (id) {

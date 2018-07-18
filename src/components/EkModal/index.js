@@ -16,12 +16,11 @@ class EkModal extends EkComponent {
     confirmText = '确定',
     cancelText = '取消',
     onConfirm = noop,
-    onCancel = noop
+    onCancel = () => this.hide()
   } = {}) {
     super({
       data: {
         title,
-        content,
         closable,
         mask,
         confirmVisible,
@@ -65,6 +64,10 @@ class EkModal extends EkComponent {
 
   hide () {
     this.$el.hide()
+  }
+
+  destroy () {
+    this.$el.remove()
   }
 }
 

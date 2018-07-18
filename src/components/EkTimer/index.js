@@ -13,13 +13,11 @@ class EkTimer extends EkComponent {
       {type: 'm', label: '分', data: [0, 0]},
       {type: 's', label: '秒', data: [0, 0]}
     ],
-    options: {
-      endTime
-    }
+    endTime
   } = {}) {
     super({id, data, template})
 
-    this.options = {endTime}
+    this.endTime = endTime
     this.$number = null
     this.timer = null
     this.render()
