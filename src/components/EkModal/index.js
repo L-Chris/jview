@@ -10,6 +10,7 @@ class EkModal extends EkComponent {
     closable,
     visible = false,
     mask = true,
+    maskClosable = false,
     width = 520,
     confirmVisible = true,
     cancelVisible = true,
@@ -31,24 +32,29 @@ class EkModal extends EkComponent {
       template
     })
 
+    this.visible = visible
+    this.maskClosable = maskClosable
     this.onConfirm = onConfirm.bind(this)
     this.onCancel = onCancel.bind(this)
 
     this.$content = null
+    this.$mask = null
     this.$cancel = null
     this.$confirm = null
-
+    this.$close = null
+  
     this.render()
   }
 
   render () {
     this.$el = this.compile()
-
     this.$content = $('.ek-modal-body', this.$el)
+    this.$mask = $('.ek-modal-mask', this.$el)
     this.$cancel = $('[data-type=cancel]', this.$el)
     this.$confirm = $('[data-type=confirm]', this.$el)
     this.$close = $('.ek-modal-close', this.$el)
 
+    this.maskClosable && this.$mask.click(() => this.hide())
     this.$cancel.click(() => this.onCancel())
     this.$confirm.click(() => this.onConfirm())
     this.$close.click(() => this.hide())
@@ -59,11 +65,13 @@ class EkModal extends EkComponent {
   }
 
   show () {
-    this.$el.show()
+    this.$el.fadeIn(150)
+    this.visible = true
   }
 
   hide () {
-    this.$el.hide()
+    this.$el.fadeOut(150)
+    this.visible = false
   }
 
   destroy () {
