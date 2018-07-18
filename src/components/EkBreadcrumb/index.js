@@ -20,7 +20,7 @@ class EkBreadcrumb extends EkComponent {
 
   render () {
     const that = this
-    let html = this.compile()
+    let $html = this.compile()
 
     $('.ek-link', $html).click(function () {
       let {index} = this.dataset
