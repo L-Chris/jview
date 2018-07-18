@@ -16,7 +16,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     proxy: {},
     compress: true,
     historyApiFallback: true,
-    port: 8080,
+    port: config.dev.port,
     open: true,
     hot: true,
     quiet: true

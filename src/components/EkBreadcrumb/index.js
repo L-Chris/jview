@@ -1,19 +1,17 @@
 import $ from '$'
 import EkComponent from '@/components/EkComponent'
 import template from './index.hbs'
-import {noop} from '@/utils'
 import './index.scss'
 
 class EkBreadcrumb extends EkComponent {
   constructor ({
     id,
     data,
-    options: {
-      handleClick = noop
-    } = {}
+    onClick = route => $.router.push(route)
   } = {}) {
     super({id, data, template})
-    this.options = {handleClick: handleClick.bind(this)}
+
+    this.onClick = onClick.bind(this)
 
     this.render()
   }
@@ -26,7 +24,7 @@ class EkBreadcrumb extends EkComponent {
       let {index} = this.dataset
       let route = that.data[index]
 
-      that.options.handleClick(route)
+      that.onClick(route)
     })
 
     this.$el.html($html)
