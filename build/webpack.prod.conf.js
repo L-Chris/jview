@@ -15,7 +15,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     publicPath: config.build.assetsPublicPath,
-    filename: utils.assetsPath('index.[chunkhash].js'),
+    filename: utils.assetsPath('index.js'),
     chunkFilename: utils.assetsPath('[id].[chunkhash].js'),
     library: 'jview',
     libraryTarget: 'umd'
@@ -46,7 +46,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       'process.env': config.build.env
     }),
     new MiniCssExtractPlugin({
-      filename: 'index.[hash].css',
+      filename: 'index.css',
       chunkFilename: '[id].[chunkhash].css'
     }),
     new OptimizeCSSPlugin({
