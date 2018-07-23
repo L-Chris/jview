@@ -2,9 +2,9 @@
   position: relative;
   width: auto;
   margin: 0 auto;
-  top: 100px;
+  top: 420px;
   padding-bottom: 24px;
-  width: 520px;
+  width: 500px;
   &-wrap {
     position: fixed;
     overflow: auto;
@@ -29,30 +29,53 @@
     @include button;
     background: transparent;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 20px;
+    top: 14px;
     z-index: 10;
     font-weight: 700;
     line-height: 1;
     border: 0;
     text-decoration: none;
     padding: 0;
+    i {
+      font-size: 14px;
+      &:hover {
+        color: $btn-color-blue;
+      }
+    }
   }
   &-content {
     position: relative;
+    font-size: 14px;
+    line-height: 24px;
     border-radius: 4px;
     background-color: #fefefe;
   }
   &-header {
     padding: 16px 24px;
   }
+  &-subheader {
+    line-height: 1;
+    font-size: 18px;
+    i {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+    &.success {
+      color: $color-info;
+    }
+    &.error {
+      color: $color-danger;
+    }
+  }
   &-body {
     padding: 24px;
   }
   &-footer {
-    padding: 10px 16px;
+    padding: 10px 16px 30px 16px;
     button + button {
-      margin-left: 24px;
+      margin-left: 16px;
     }
   }
+
 }

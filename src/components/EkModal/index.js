@@ -5,33 +5,43 @@ import './index.scss'
 
 class EkModal extends EkComponent {
   constructor ({
+    type,
     title,
+    subTitle,
+    iconType,
     content,
     closable,
     visible = false,
     mask = true,
     maskClosable = false,
-    width = 520,
     confirmVisible = true,
     cancelVisible = true,
     confirmText = '确定',
     cancelText = '取消',
+    confirmClass = 'info',
+    cancelClass = 'border-info',
     onConfirm = noop,
     onCancel = () => this.hide()
   } = {}) {
     super({
       data: {
+        type,
         title,
+        subTitle,
+        iconType,
         closable,
         mask,
         confirmVisible,
         cancelVisible,
         confirmText,
-        cancelText
+        cancelText,
+        confirmClass,
+        cancelClass
       },
       template
     })
 
+    this.content = content
     this.visible = visible
     this.maskClosable = maskClosable
     this.onConfirm = onConfirm.bind(this)
@@ -59,7 +69,7 @@ class EkModal extends EkComponent {
     this.$confirm.click(() => this.onConfirm())
     this.$close.click(() => this.hide())
 
-    this.$content.html(this.data.content)
+    this.$content.html(this.content)
     this.$el.hide()
     this.constructor.$body.append(this.$el)
   }
@@ -79,5 +89,37 @@ class EkModal extends EkComponent {
   }
 }
 
+class EkModalManager {
+  constructor () {
+    this.instances = []
+  }
 
-export default EkModal
+  create (params) {
+    let modal = new EkModal(params)
+    this.instances.push(modal)
+    return modal
+  }
+
+  close (id) {
+    let index = this.instances.findIndex(_ => _.id === id)
+    if (index < 0) return
+    this.instances.splice(index, 1)
+  }
+
+  closeAll () {
+    this.instances.forEach(_ => _.hide())
+  }
+
+  remove () {
+    let index = this.instances.findIndex(_ => _.id === id)
+    if (index < 0) return
+    this.instances.splice(index, 1)
+  }
+
+  removeAll () {
+    this.instances.forEach(_ => _.destroyed())
+    this.instances = []
+  }
+}
+
+export default new EkModalManager()

@@ -7,15 +7,31 @@ export const alertTypes = [
 export const modalTypes = [
   {
     type: 'info',
+    confirmVisible: false,
+    cancelVisible: false
+  },
+  {
+    type: 'success',
     confirmVisible: true,
     cancelVisible: false,
     confirmVisible: '知道了',
+    confirmClass: 'info',
+    iconType: 'smile',
     onConfirm () {
       this.hide()
     }
   },
-  { type: 'success' },
-  { type: 'error' },
+  {
+    type: 'error',
+    confirmVisible: true,
+    cancelVisible: false,
+    confirmVisible: '知道了',
+    confirmClass: 'error',
+    iconType: 'info',
+    onConfirm () {
+      this.hide()
+    }
+  },
   { type: 'warning' },
   {
     type: 'confirm',
