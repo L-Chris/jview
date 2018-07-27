@@ -21,7 +21,8 @@ class EkModal extends EkComponent {
     confirmClass = 'info',
     cancelClass = 'border-info',
     onConfirm = noop,
-    onCancel = () => this.hide()
+    onCancel = () => this.hide(),
+    afterClose = noop
   } = {}) {
     super({
       data: {
@@ -46,6 +47,7 @@ class EkModal extends EkComponent {
     this.maskClosable = maskClosable
     this.onConfirm = onConfirm.bind(this)
     this.onCancel = onCancel.bind(this)
+    this.afterClose = afterClose.bind(this)
 
     this.$content = null
     this.$mask = null
@@ -82,6 +84,7 @@ class EkModal extends EkComponent {
   hide () {
     this.$el.fadeOut(150)
     this.visible = false
+    this.afterClose()
   }
 
   destroy () {
