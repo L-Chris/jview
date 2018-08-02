@@ -31,10 +31,7 @@ export default $ => {
       }
       return pre
     }, {}),
-    modal: modalTypes.reduce((pre, _) => {
-      pre[_.type] = options => EkModal.create(Object.assign({ type: _.type }, _, options))
-      return pre
-    }, {}),
+    modal: EkModal,
     tooltip: (message, options) => {
       let params = Object.assign({message}, options)
       return EkTooltip.create(params);

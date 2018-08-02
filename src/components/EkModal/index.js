@@ -1,16 +1,20 @@
 import EkComponent from '@/components/EkComponent'
 import {noop} from '@/utils'
+import {modalTypes} from '@/utils/const'
 import template from './index.hbs'
 import './index.scss'
 
-class EkModal extends EkComponent {
+const queue = []
+let currentModal = null
+
+class EkModalConstructor extends EkComponent {
   constructor ({
     type,
     title,
     subTitle,
     iconType,
     content,
-    closable,
+    closable = true,
     visible = false,
     mask = true,
     maskClosable = false,
@@ -18,11 +22,14 @@ class EkModal extends EkComponent {
     cancelVisible = true,
     confirmText = '确定',
     cancelText = '取消',
-    confirmClass = 'info',
+    confirmClass = 'status-info',
     cancelClass = 'border-info',
+    resolve,
+    reject,
     onConfirm = noop,
     onCancel = () => this.hide(),
-    afterClose = noop
+    onClose = () => this.hide(),
+    onHide = noop
   } = {}) {
     super({
       data: {
@@ -45,22 +52,35 @@ class EkModal extends EkComponent {
     this.content = content
     this.visible = visible
     this.maskClosable = maskClosable
-    this.onConfirm = onConfirm.bind(this)
-    this.onCancel = onCancel.bind(this)
-    this.afterClose = afterClose.bind(this)
+    this.onConfirm = () => {
+      onConfirm.apply(this)
+      resolve('confirm')
+    }
+    this.onCancel = () => {
+      onCancel.apply(this)
+      resolve('cancel')
+    }
+    this.onClose = onClose.bind(this)
+    this.onHide = () => {
+      onHide.bind(this)
+      currentModal = null
+      showNext()
+    }
 
     this.$content = null
+    this.$contentBody = null
     this.$mask = null
     this.$cancel = null
     this.$confirm = null
     this.$close = null
-  
+
     this.render()
   }
 
   render () {
     this.$el = this.compile()
-    this.$content = $('.ek-modal-body', this.$el)
+    this.$content = $('.ek-modal-content', this.$el)
+    this.$contentBody = $('.ek-modal-body', this.$el)
     this.$mask = $('.ek-modal-mask', this.$el)
     this.$cancel = $('[data-type=cancel]', this.$el)
     this.$confirm = $('[data-type=confirm]', this.$el)
@@ -69,9 +89,11 @@ class EkModal extends EkComponent {
     this.maskClosable && this.$mask.click(() => this.hide())
     this.$cancel.click(() => this.onCancel())
     this.$confirm.click(() => this.onConfirm())
-    this.$close.click(() => this.hide())
+    this.$close.click(() => {
+      this.onClose()
+    })
 
-    this.$content.html(this.content)
+    this.$contentBody.html(this.content)
     this.$el.hide()
     this.constructor.$body.append(this.$el)
   }
@@ -84,45 +106,47 @@ class EkModal extends EkComponent {
   hide () {
     this.$el.fadeOut(150)
     this.visible = false
-    this.afterClose()
+    this.onHide()
   }
 
-  destroy () {
+  remove () {
     this.$el.remove()
   }
 }
 
-class EkModalManager {
-  constructor () {
-    this.instances = []
-  }
+const EkModal = options => {
+  return new Promise((resolve, reject) => {
+    queue.push({
+      options,
+      resolve,
+      reject
+    })
 
-  create (params) {
-    let modal = new EkModal(params)
-    this.instances.push(modal)
-    return modal
-  }
-
-  close (id) {
-    let index = this.instances.findIndex(_ => _.id === id)
-    if (index < 0) return
-    this.instances.splice(index, 1)
-  }
-
-  closeAll () {
-    this.instances.forEach(_ => _.hide())
-  }
-
-  remove () {
-    let index = this.instances.findIndex(_ => _.id === id)
-    if (index < 0) return
-    this.instances.splice(index, 1)
-  }
-
-  removeAll () {
-    this.instances.forEach(_ => _.destroyed())
-    this.instances = []
-  }
+    showNext()
+  })
 }
 
-export default new EkModalManager()
+EkModal.closeAll = () => {
+  queue.forEach(_ => _.hide())
+}
+EkModal.removeAll = () => {
+  queue.forEach(_ => _.remove())
+}
+
+// modal type
+modalTypes.reduce((pre, _) => {
+  pre[_.type] = options => EkModal(Object.assign({}, _, options))
+  return pre
+}, EkModal)
+
+const showNext = () => {
+  if (!queue.length) return
+  if (currentModal) return
+  let {options, resolve, reject} = queue.shift()
+  options.resolve = resolve
+  options.reject = reject
+  currentModal = new EkModalConstructor(options)
+  currentModal.show()
+}
+
+export default EkModal
