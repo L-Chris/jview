@@ -6,7 +6,7 @@ import './index.scss'
 class EkBackTop extends EkComponent {
   constructor ({id}) {
     super({id, template})
-    
+
     this.render()
   }
 
@@ -22,7 +22,7 @@ class EkBackTop extends EkComponent {
         this.$el.hide()
       }
     }, 200))
-  
+
     this.$el.click(() => {
       $body.animate({
         scrollTop: 0

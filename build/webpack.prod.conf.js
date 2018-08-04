@@ -8,6 +8,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const es3ifyPlugin = require('es3ify-webpack-plugin')
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -45,6 +46,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': config.build.env
     }),
+    new es3ifyPlugin(),
     new MiniCssExtractPlugin({
       filename: 'index.css',
       chunkFilename: '[id].[chunkhash].css'

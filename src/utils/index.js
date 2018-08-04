@@ -1,10 +1,3 @@
-import moment from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-
-moment.extend(relativeTime)
-
-export {moment}
-
 export function isUndef (v) {
   return v === undefined || v === null
 }
@@ -12,6 +5,27 @@ export function isUndef (v) {
 export const noop = () => {}
 
 export const identity = _ => _
+
+function isType (name) {
+  return function (obj) {
+    return toString.call(obj) === '[object ' + name + ']'
+  }
+}
+
+export const isObject = isType('Object')
+export const isArray = isType('Array')
+export const isString = isType('String')
+
+export const numberPrefix = (num, length, chars = '0') => {
+  let res = ''
+  num += ''
+  let prefixLength = length - num.length
+  if (prefixLength <= 0) return num
+  for (let i = 0; i < prefixLength; i++) {
+    res += chars
+  }
+  return res + num
+}
 
 // 对对象解析路径下的属性
 const bailRE = /[^\w.$]/

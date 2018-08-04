@@ -5,20 +5,25 @@
 	<div class="ek-modal-wrap" tabindex="-1">
 		<div class="ek-modal">
 			<div class="ek-modal-content">
-				<button aria-label="Close" role="button" class="ek-modal-close">X</button>
+        {{#if closable}}
+        	<button aria-label="Close" class="ek-modal-close"><i class="iconfont icon-close"></i></button>
+        {{/if}}
 				<div class="ek-modal-header">{{title}}</div>
-				<div class="ek-modal-body"></div>
+				{{#if subTitle}}
+					<div class="ek-modal-subheader text-center {{type}}"><i class="iconfont icon-{{iconType}}"></i>{{subTitle}}</div>
+				{{/if}}
+				<div class="ek-modal-body text-center"></div>
 				<div class="ek-modal-footer">
 					<div class="text-center">
 						{{#if cancelVisible}}
-							<button data-type="cancel" class="ek-button medium plain rounded">{{cancelText}}</button>
+							<button data-type="cancel" class="ek-button medium rounded {{cancelClass}}">{{cancelText}}</button>
 						{{/if}}
 						{{#if confirmVisible}}
-							<button data-type="confirm" class="ek-button medium info rounded">{{confirmText}}</button>
+							<button data-type="confirm" class="ek-button medium rounded {{confirmClass}}">{{confirmText}}</button>
 						{{/if}}
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
-	</div>	
+	</div>
 </div>

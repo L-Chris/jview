@@ -9,13 +9,31 @@ export const modalTypes = [
     type: 'info',
     confirmVisible: true,
     cancelVisible: false,
-    confirmVisible: '知道了',
+    confirmText: '知道了',
+    confirmClass: 'info'
+  },
+  {
+    type: 'success',
+    confirmVisible: true,
+    cancelVisible: false,
+    confirmText: '知道了',
+    confirmClass: 'info',
+    iconType: 'smile',
     onConfirm () {
       this.hide()
     }
   },
-  { type: 'success' },
-  { type: 'error' },
+  {
+    type: 'error',
+    confirmVisible: true,
+    cancelVisible: false,
+    confirmVisible: '知道了',
+    confirmClass: 'error',
+    iconType: 'info',
+    onConfirm () {
+      this.hide()
+    }
+  },
   { type: 'warning' },
   {
     type: 'confirm',
@@ -26,5 +44,10 @@ export const modalTypes = [
     onCancel () {
       this.hide()
     }
+  },
+  {
+    type: 'tip',
+    confirmVisible: false,
+    cancelVisible: false
   }
 ]

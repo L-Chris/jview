@@ -1,34 +1,39 @@
 import $ from '$'
 import EkComponent from '@/components/EkComponent'
-import {moment} from '@/utils'
+import {noop, numberPrefix} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
 class EkTimer extends EkComponent {
   constructor ({
     id,
-    data = [
-      {type: 'D', label: '天', data: [0, 0]},
-      {type: 'H', label: '时', data: [0, 0]},
-      {type: 'm', label: '分', data: [0, 0]},
-      {type: 's', label: '秒', data: [0, 0]}
-    ],
-    endTime
+    endTime,
+    afterEnd = noop
   } = {}) {
-    super({id, data, template})
+    super({
+      id,
+      data: [
+        {type: 'D', label: '天', data: [0, 0]},
+        {type: 'H', label: '时', data: [0, 0]},
+        {type: 'm', label: '分', data: [0, 0]},
+        {type: 's', label: '秒', data: [0, 0]}
+      ],
+      template
+    })
 
     this.endTime = endTime
-    this.$number = null
+    this.afterEnd = afterEnd.bind(this)
     this.timer = null
+
+    this.$number = null
     this.render()
   }
 
   render () {
     let $html = this.compile()
-
     this.$number = $('.ek-timer-number', $html)
-    this.$el.html($html)
     this.tick()
+    this.$el.html($html)
   }
 
   update (data) {
@@ -40,14 +45,29 @@ class EkTimer extends EkComponent {
 
   tick () {
     this.timer = setInterval(() => {
-      let data = this.constructor._generateData(this.options.endTime)
+      let data = this._generateData(this.options.endTime)
       this.update(data)
     }, 1000)
   }
 
-  static _generateData (time) {
-    let leftTime = moment(time).diff(moment())
-    return moment(leftTime).format('DDHHMMss').split('')
+  clearTick () {
+    if (!this.timer) return
+    clearInterval(this.timer)
+    this.afterEnd()
+  }
+
+  _generateData () {
+    let str = ''
+    let leftTime = parseInt((this.endTime - new Date()) / 1000)
+    if (leftTime <= 0) {
+      this.clearTick()
+      leftTime = 0
+    }
+    for (let divisor of [86400, 3600, 60, 1]) {
+      str += numberPrefix(parseInt(leftTime / divisor), 2)
+      leftTime = leftTime % divisor
+    }
+    return str.split('')
   }
 }
 

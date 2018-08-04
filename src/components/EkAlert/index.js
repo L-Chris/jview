@@ -1,76 +1,88 @@
 import EkComponent from '@/components/EkComponent'
+import {noop} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
-const emmiter = $({})
 let id = 0
 const uid = () => id++
 
 class EkAlert extends EkComponent {
   constructor ({
-    id = `ek-alert-${uid()}`,
     title,
     type,
+    wait = 2500,
     closable = true,
-    wait = 2500
-  }) {
+    afterClose = noop
+  } = {}) {
     super({
-      data: {id, title, type, closable},
+      data: {id: `ek-alert-${uid()}`, title, type, closable},
       template
     })
 
     this.wait = wait
-    this.$close = null
+    this.afterClose = afterClose.bind(this)
 
     this.render()
   }
 
   render () {
     this.$el = this.compile()
-    this.$close = $('.ek-alert-close', this.$el)
 
-    this.$close.click(() => this.destroyed())
+    $('.close', this.$el).click(() => this.destroyed())
     this.constructor.$body.append(this.$el)
-
-    this.$el.animate({ top: 10 }, 'slow')
+    this.show()
     setTimeout(() => this.destroyed(), this.wait)
+  }
+
+  show () {
+    this.$el.animate({ top: 56 }, 'swig')
+  }
+
+  hide () {
+    this.$el.animate({ top: '-100%' }, 'swig', () => {
+      this.$el.hide()
+    })
   }
 
   destroyed () {
     if (!this.$el) return
-    this.$el.animate({ top: '-100%' }, 'slow', () => {
+    this.$el.animate({ top: '-100%' }, 'swig', () => {
       this.$el.remove()
-      emmiter.trigger('alter-destroyed', this.data.id)
+      this.afterClose()
     })
   }
 }
 
 class EkAlertManager {
   constructor ({maxLength = 10} = {}) {
-    this.list = []
+    this.instances = []
     this.maxLength = maxLength
-
-    emmiter.on('alter-destroyed', id => {
-      this.remove(id)
-    })
   }
 
   create (params) {
     let item = new EkAlert(params)
-    if (this.list.length >= this.maxLength) this.list.shift().destroyed()
-    this.list.push(item)
-    return item
+    this.instances.push(item)
+  }
+
+  close (id) {
+    let index = this.instances.findIndex(_ => _.id === id)
+    if (index < 0) return
+    this.instances.hide()
+  }
+
+  closeAll () {
+    this.instances.forEach(_ => _.hide())
   }
 
   remove (id) {
-    let index = this.list.findIndex(_ => _.id === id)
+    let index = this.instances.findIndex(_ => _.id === id)
     if (index < 0) return
-    this.list.splice(index, 1)
+    this.instances.splice(index, 1)
   }
 
-  clear () {
-    this.list.forEach(_ => _.destroyed())
-    this.list = []
+  removeAll () {
+    this.instances.forEach(_ => _.destroyed())
+    this.instances = []
   }
 }
 

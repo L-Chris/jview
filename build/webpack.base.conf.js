@@ -3,8 +3,6 @@ const utils = require('./utils')
 const autoprefixer = require('autoprefixer')
 const config = require('../config')
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const es3ifyPlugin = require('es3ify-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -44,7 +42,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [new es3ifyPlugin()],
   externals: {
     $: 'window.jQuery'
   }
