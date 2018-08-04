@@ -1,9 +1,18 @@
 {
   "presets":[
-    ["@babel/preset-env", { "loose": true }],
-    ["@babel/preset-stage-2", { "decoratorsLegacy": true }]
+    ["@babel/preset-env", {
+      "loose": true,
+      "targets": {
+        "browsers": ["IE >= 8"]
+      }
+    }]
   ],
   "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": false }],
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/plugin-proposal-throw-expressions",
     "add-module-exports"
   ]
 }

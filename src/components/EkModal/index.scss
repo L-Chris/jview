@@ -1,19 +1,23 @@
 .ek-modal {
-  position: relative;
-  width: auto;
-  margin: 0 auto;
-  top: 420px;
-  padding-bottom: 24px;
-  width: 500px;
+  display: inline-block;
+  width: 520px;
+  vertical-align: middle;
   &-wrap {
     position: fixed;
-    overflow: auto;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    text-align: center;
     z-index: 1000;
     outline: 0;
+    &:after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 0;
+      vertical-align: middle;
+    }
   }
   &-mask {
     position: fixed;
@@ -53,26 +57,29 @@
   }
   &-header {
     padding: 16px 24px;
+    margin-bottom: 26px;
   }
   &-subheader {
+    margin-bottom: 12px;
     line-height: 1;
     font-size: 18px;
     i {
-      margin-right: 10px;
+      margin-right: 8px;
       font-size: 20px;
     }
-    &.success {
+    &.status-success {
       color: $color-info;
     }
-    &.error {
-      color: $color-danger;
+    &.status-error {
+      color: $color-error;
     }
   }
   &-body {
-    padding: 24px;
+    padding: 0 24px 24px 24px;
+    color: $text-color-grey-darken;
   }
   &-footer {
-    padding: 10px 16px 30px 16px;
+    padding: 0 16px 32px 16px;
     button + button {
       margin-left: 16px;
     }

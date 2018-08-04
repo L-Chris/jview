@@ -11,7 +11,7 @@ export default $ => {
     throttle (fn, wait) {
       let timer = null
       let previous = 0
-      
+
       return function () {
         let now = Date.now()
         if (!previous) previous = now
@@ -34,7 +34,7 @@ export default $ => {
     modal: EkModal,
     tooltip: (message, options) => {
       let params = Object.assign({message}, options)
-      return EkTooltip.create(params);
+      return EkTooltip.create(params)
     }
   })
 }

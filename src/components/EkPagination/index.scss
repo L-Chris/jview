@@ -1,6 +1,7 @@
 .ek-pagination {
   ul {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
   }
   li {
     float: left;
@@ -20,10 +21,12 @@
     }
   }
   &-total {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     margin-right: 16px!important;
     line-height: 30px;
     color: $text-color-grey;
+    font-size: 13px;
   }
   &-prev, &-next {
     width: 60px;

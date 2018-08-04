@@ -3,24 +3,41 @@
   top: -100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px;
-  padding: 10px 15px;
+  width: 1000px;
+  padding: 0 15px;
   margin: 0 auto;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
   z-index: 100;
-  color: #fff;
-  &.is-success {
-    background-color: $color-success;
+  &.status-success {
+    background-color: #d3f6ce;
+    color: $color-success;
+    .close {
+      color: $color-success;
+    }
   }
-  &.is-warn {
+  &.status-warn {
     background-color: $color-warn;
   }
-  &.is-danger {
-    background-color: $color-danger;
+  &.status-error {
+    background-color: #ffd7d7;
+    color: $color-error;
+    .close {
+      color: $color-error;
+    }
   }
-  &-close {
+  .close {
+    height: 40px;
     -webkit-appearance: none;
     background: 0 0;
     border: 0;
-    color: #fff;
+    span {
+      display: inline-block;
+      line-height: 40px;
+      height: 100%;
+      font-size: 24px;
+      font-weight: 100;
+    }
   }
 }

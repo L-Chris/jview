@@ -12,17 +12,6 @@ exports.assetsPath = _path => {
   return path.posix.join(assetsSubDirectory, _path)
 }
 
-exports.findEntry = _path => {
-  let baseName, tmp, pathName
-  
-  return glob.sync(_path).reduce((pre, entry) => {
-    baseName = path.basename(entry, path.extname(entry))
-    pathName = `${entry.split('/').slice(-2, -1)}/${baseName}`
-    pre[pathName] = entry
-    return pre
-  }, Object.create(null))
-}
-
 exports.generateStyleLoaders = () => {
   const isProd = process.env.NODE_ENV === 'production'
   let cssLoaders = ['css-loader', 'style-loader', 'postcss-loader']
@@ -33,12 +22,15 @@ exports.generateStyleLoaders = () => {
     }
   }]
 
-  let miniCssExtractLoader = {
-    loader: MiniCssExtractPlugin.loader,
-    options: {}
+  if (isProd) {
+    let miniCssExtractLoader = {
+      loader: MiniCssExtractPlugin.loader,
+      options: {}
+    }
+    cssLoaders.unshift(miniCssExtractLoader)
+    scssLoaders.unshift(miniCssExtractLoader)
   }
-  cssLoaders.unshift(miniCssExtractLoader)
-  scssLoaders.unshift(miniCssExtractLoader)
+
   return [
     {
       test: /\.css$/,

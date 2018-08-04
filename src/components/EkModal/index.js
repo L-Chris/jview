@@ -62,7 +62,7 @@ class EkModalConstructor extends EkComponent {
     }
     this.onClose = onClose.bind(this)
     this.onHide = () => {
-      onHide.bind(this)
+      onHide.apply(this)
       currentModal = null
       showNext()
     }
