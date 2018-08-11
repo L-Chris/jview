@@ -1,0 +1,22 @@
+<div class="ek-carousel">
+  <div class="ek-carousel-wrapper">
+    <ul class="ek-carousel-list clearfix">
+      {{#each list as |item|}}
+      <li class="ek-carousel-item">
+        {{{item}}}
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{#if showIndicatros}}
+  <ul class="ek-carousel-indicators">
+    {{#each list}}
+    <li class="ek-carousel-indicator"></li>
+    {{/each}}
+  </ul>
+  {{/if}}
+  {{#if showArrow}}
+  <i class="iconfont icon-arrow_left"/>
+  <i class="iconfont icon-arrow_right"/>
+  {{/if}}
+</div>

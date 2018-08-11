@@ -1,13 +1,10 @@
 import EkAlert from '@/components/EkAlert'
 import EkModal from '@/components/EkModal'
 import EkTooltip from '@/components/EkToolTip'
-import {alertTypes, modalTypes} from '@/utils/const'
+import {alertTypes} from '@/utils/const'
 
 export default $ => {
   $.extend({
-    nextTick (fn) {
-      return setTimeout(fn, 0)
-    },
     throttle (fn, wait) {
       let timer = null
       let previous = 0
