@@ -1,0 +1,27 @@
+.ek-carousel {
+  position: relative;
+  &-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  &-list {
+    position: absolute;
+  }
+  &-item {
+    float: left;
+  }
+  .iconfont {
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    font-weight: bold;
+    color: #848484;
+    cursor: pointer;
+    &.icon-arrow_left {
+      left: -42px;
+    }
+    &.icon-arrow_right {
+      right: -42px;
+    }
+  }
+}

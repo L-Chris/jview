@@ -13,7 +13,6 @@ exports.assetsPath = _path => {
 }
 
 exports.generateStyleLoaders = () => {
-  const isProd = process.env.NODE_ENV === 'production'
   let cssLoaders = ['css-loader', 'style-loader', 'postcss-loader']
   let scssLoaders = ['css-loader', 'postcss-loader', 'sass-loader', {
     loader: 'sass-resources-loader',
@@ -22,14 +21,12 @@ exports.generateStyleLoaders = () => {
     }
   }]
 
-  if (isProd) {
-    let miniCssExtractLoader = {
-      loader: MiniCssExtractPlugin.loader,
-      options: {}
-    }
-    cssLoaders.unshift(miniCssExtractLoader)
-    scssLoaders.unshift(miniCssExtractLoader)
+  let miniCssExtractLoader = {
+    loader: MiniCssExtractPlugin.loader,
+    options: {}
   }
+  cssLoaders.unshift(miniCssExtractLoader)
+  scssLoaders.unshift(miniCssExtractLoader)
 
   return [
     {
