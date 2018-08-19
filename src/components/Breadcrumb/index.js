@@ -1,9 +1,9 @@
 import $ from '$'
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import template from './index.hbs'
 import './index.scss'
 
-class EkBreadcrumb extends EkComponent {
+class Breadcrumb extends Component {
   constructor ({
     id,
     data,
@@ -31,4 +31,4 @@ class EkBreadcrumb extends EkComponent {
   }
 }
 
-export default EkBreadcrumb
+export default Breadcrumb

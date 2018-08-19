@@ -1,9 +1,9 @@
 import $ from '$'
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import template from './index.hbs'
 import './index.scss'
 
-class EkBackTop extends EkComponent {
+class BackTop extends Component {
   constructor ({id}) {
     super({id, template})
 
@@ -33,4 +33,4 @@ class EkBackTop extends EkComponent {
   }
 }
 
-export default EkBackTop
+export default BackTop

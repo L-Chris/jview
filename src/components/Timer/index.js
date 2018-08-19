@@ -1,10 +1,10 @@
 import $ from '$'
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import {noop, numberPrefix} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
-class EkTimer extends EkComponent {
+class Timer extends Component {
   constructor ({
     id,
     endTime,
@@ -71,4 +71,4 @@ class EkTimer extends EkComponent {
   }
 }
 
-export default EkTimer
+export default Timer

@@ -1,10 +1,10 @@
 import $ from '$'
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import {noop} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
 
-class EkPagination extends EkComponent {
+class Pagination extends Component {
   constructor ({
     id,
     page = 1,
@@ -193,4 +193,4 @@ class EkPagination extends EkComponent {
   }
 }
 
-export default EkPagination
+export default Pagination

@@ -1,4 +1,4 @@
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import {noop} from '@/utils'
 import {modalTypes} from '@/utils/const'
 import template from './index.hbs'
@@ -7,7 +7,7 @@ import './index.scss'
 const queue = []
 let currentModal = null
 
-class EkModalConstructor extends EkComponent {
+class ModalConstructor extends Component {
   constructor ({
     type,
     title,
@@ -145,8 +145,8 @@ const showNext = () => {
   let {options, resolve, reject} = queue.shift()
   options.resolve = resolve
   options.reject = reject
-  currentModal = new EkModalConstructor(options)
+  currentModal = new ModalConstructor(options)
   currentModal.show()
 }
 
-export default EkModal
+export default Modal

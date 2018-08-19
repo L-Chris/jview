@@ -1,7 +1,7 @@
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import template from './index.hbs'
 
-class EkTab extends EkComponent {
+class Tab extends Component {
   constructor ({id, tag}) {
     super({id, data, template})
   }
@@ -9,4 +9,4 @@ class EkTab extends EkComponent {
   render () {}
 }
 
-export default EkTab
+export default Tab

@@ -1,4 +1,4 @@
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import {noop} from '@/utils'
 import template from './index.hbs'
 import './index.scss'
@@ -6,7 +6,7 @@ import './index.scss'
 let id = 0
 const uid = () => id++
 
-class EkAlert extends EkComponent {
+class Alert extends Component {
   constructor ({
     title,
     type,
@@ -53,14 +53,14 @@ class EkAlert extends EkComponent {
   }
 }
 
-class EkAlertManager {
+class AlertManager {
   constructor ({maxLength = 10} = {}) {
     this.instances = []
     this.maxLength = maxLength
   }
 
   create (params) {
-    let item = new EkAlert(params)
+    let item = new Alert(params)
     this.instances.push(item)
   }
 
@@ -86,4 +86,4 @@ class EkAlertManager {
   }
 }
 
-export default new EkAlertManager ()
+export default new AlertManager ()

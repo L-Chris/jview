@@ -1,9 +1,9 @@
 import $ from '$'
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import template from './index.hbs'
 import './index.scss'
 
-class EkTooltip extends EkComponent {
+class Tooltip extends Component {
   constructor ({
     title,
     placement,
@@ -26,14 +26,14 @@ class EkTooltip extends EkComponent {
       let selfWidth = this.$el.innerWidth()
       this.target.css('position', 'relative')
       switch(this.position) {
-        case 'right': 
+        case 'right':
           this.$el.css({
             'top': pHeight / 2 + selfHeight / 2 + 'px',
             'left': pWidth + 20 + 'px',
             'margin-top': -selfHeight + 'px'
           })
           break
-        case 'left': 
+        case 'left':
           this.$el.css({
             'top': pHeight / 2 + selfHeight / 2 + 'px',
             'right': pWidth + 20 + 'px',
@@ -42,7 +42,7 @@ class EkTooltip extends EkComponent {
           break
       }
     })
-    
+
     $('input', this.target).focus(() => this.hide())
   }
 
@@ -55,4 +55,4 @@ class EkTooltip extends EkComponent {
   }
 }
 
-export default EkTooltip
+export default Tooltip

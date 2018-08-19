@@ -1,6 +1,6 @@
-import EkAlert from '@/components/EkAlert'
-import EkModal from '@/components/EkModal'
-import EkTooltip from '@/components/EkToolTip'
+import EkAlert from '@/components/Alert'
+import EkModal from '@/components/Modal'
+import EkTooltip from '@/components/ToolTip'
 import {alertTypes} from '@/utils/const'
 
 export default $ => {

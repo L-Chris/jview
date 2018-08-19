@@ -1,6 +1,6 @@
 import {noop} from '@/utils'
 
-class EkComponent {
+class Component {
   static $window = $(window)
   static $body = $('body')
 
@@ -20,4 +20,4 @@ class EkComponent {
   }
 }
 
-export default EkComponent
+export default Component

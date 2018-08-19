@@ -1,8 +1,8 @@
-import EkComponent from '@/components/EkComponent'
+import Component from '@/components/Component'
 import template from './index.hbs'
 import './index.scss'
 
-class EkCarousel extends EkComponent {
+class Carousel extends Component {
   constructor ({
     id,
     list,
@@ -56,4 +56,4 @@ class EkCarousel extends EkComponent {
   }
 }
 
-export default EkCarousel
+export default Carousel
